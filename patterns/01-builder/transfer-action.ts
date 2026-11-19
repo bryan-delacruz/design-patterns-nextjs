@@ -1,7 +1,7 @@
-// @/actions/transfer.tsx
+// @/patterns/01-builder/transfer-action.ts
 "use server";
 
-import { TransferBuilder } from "@/lib/transferBuilder";
+import { TransferBuilder } from "./transfer-builder";
 
 export const processTransfer = async (data: {
   fromAccount: string;

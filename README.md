@@ -1,4 +1,4 @@
-# Builder Pattern in Next.js | Bank Transfer Form
+# Design patterns in Next.js
 
 ![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
@@ -7,36 +7,26 @@
 
 **Live:** [bdlc-01-article-pattern-builder.vercel.app](https://bdlc-01-article-pattern-builder.vercel.app)
 
-A small, focused example of the **Builder design pattern** in a modern Next.js app. A bank transfer form sends its data to a **Server Action**, which builds and validates a `Transfer` object step by step with a fluent `TransferBuilder`.
+Small, focused examples of classic design patterns applied to real use cases in a modern Next.js app. Each pattern lives in its own folder with its code and a README, and has its own route in the demo.
 
-## What it shows
+## Patterns
 
-- **Builder pattern:** `TransferBuilder` sets each field with a chainable method (`setFromAccount().setToAccount().setAmount()...`) and validates the object in `build()`.
-- **Validation at the right step:** `setAmount()` rejects amounts ≤ 0. `build()` rejects a transfer without origin account, destination account or amount.
-- **Sensible defaults:** currency starts as `USD`. Reference and message are optional.
-- **Server Actions:** the form posts to `processTransfer` (`"use server"`) with no API route.
-- **Pending UI with `useTransition`:** the submit button shows "Procesando..." and is disabled while the action runs.
+| # | Pattern | Type | Example | Demo |
+|---|---------|------|---------|------|
+| 01 | [Builder](patterns/01-builder) | Creational | Bank transfer form validated with Server Actions | [/builder](https://bdlc-01-article-pattern-builder.vercel.app/builder) |
 
-## How it works
-
-```ts
-const transfer = new TransferBuilder()
-  .setFromAccount(data.fromAccount)
-  .setToAccount(data.toAccount)
-  .setAmount(parseFloat(data.amount))
-  .setCurrency(data.currency)
-  .setReference(data.reference)
-  .setMessage(data.message)
-  .build();
-```
-
-## Project structure
+## Structure
 
 ```
-app/page.tsx              Transfer form (client component)
-actions/transfer.tsx      Server Action that uses the builder
-lib/transferBuilder.ts    Transfer type and TransferBuilder class
+patterns/
+  index.ts          Pattern registry (feeds the home page)
+  01-builder/       Code and README of the Builder pattern
+app/
+  page.tsx          Index of all patterns
+  builder/page.tsx  Builder demo route
 ```
+
+To add a pattern: create `patterns/NN-name/` with its code and README, add a route in `app/<slug>/page.tsx`, and register it in `patterns/index.ts`.
 
 ## Tech stack
 
