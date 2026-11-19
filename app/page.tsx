@@ -1,92 +1,44 @@
 // @/app/page.tsx
-"use client";
+import Link from "next/link";
 
-import { useState, useTransition } from "react";
+import { patterns, REPO_URL } from "@/patterns";
 
-import { Transfer } from "@/lib/transferBuilder";
-import { processTransfer } from "@/actions/transfer";
-
-export default function TransferPage() {
-  const [result, setResult] = useState<Transfer | null>(null);
-  const [isPending, startTransition] = useTransition();
-
-  const handleSubmit = async (formData: FormData) => {
-    const data = Object.fromEntries(formData) as {
-      fromAccount: string;
-      toAccount: string;
-      amount: string;
-      currency: string;
-      reference?: string;
-      message?: string;
-    };
-
-    startTransition(async () => {
-      try {
-        const transfer = await processTransfer(data);
-        setResult(transfer);
-      } catch (error) {
-        console.error("Error al procesar la transferencia:", error);
-        setResult(null);
-      }
-    });
-  };
-
+export default function HomePage() {
   return (
-    <main className="max-w-md mx-auto mt-8 p-6">
-      <h1 className="text-2xl font-bold mb-6 text-gray-800">Realizar Transferencia</h1>
-      <form action={handleSubmit} className="space-y-4">
-        <input
-          name="fromAccount"
-          placeholder="Cuenta de origen"
-          required
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <input
-          name="toAccount"
-          placeholder="Cuenta destino"
-          required
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <input
-          name="amount"
-          type="number"
-          step="0.01"
-          placeholder="Monto"
-          required
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <input
-          name="currency"
-          placeholder="Moneda"
-          defaultValue="USD"
-          required
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <input
-          name="reference"
-          placeholder="Referencia (opcional)"
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <textarea
-          name="message"
-          placeholder="Mensaje (opcional)"
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[100px]"
-        />
-        <button
-          type="submit"
-          disabled={isPending}
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 disabled:bg-blue-300 disabled:cursor-not-allowed transition-colors"
-        >
-          {isPending ? "Procesando..." : "Enviar"}
-        </button>
-      </form>
+    <main className="max-w-2xl mx-auto mt-8 p-6">
+      <h1 className="text-2xl font-bold mb-2 text-gray-800">Patrones de diseño en Next.js</h1>
+      <p className="mb-8 text-gray-600">
+        Un ejemplo pequeño y enfocado por patrón. Cada uno tiene su demo y su código en una carpeta
+        propia del repositorio.
+      </p>
 
-      {result && (
-        <div className="mt-8 p-4 bg-gray-50 rounded-md">
-          <h2 className="text-xl font-semibold mb-4 text-gray-700">Resultado de la Transferencia</h2>
-          <pre className="bg-white p-4 rounded-md overflow-x-auto">{JSON.stringify(result, null, 2)}</pre>
-        </div>
-      )}
+      <ul className="space-y-4">
+        {patterns.map((pattern) => (
+          <li key={pattern.slug} className="p-4 border border-gray-200 rounded-md">
+            <div className="flex items-baseline justify-between gap-4">
+              <h2 className="text-lg font-semibold text-gray-800">
+                <span className="font-mono text-gray-400 mr-2">{pattern.number}</span>
+                {pattern.name}
+              </h2>
+              <span className="text-xs text-gray-500">{pattern.category}</span>
+            </div>
+            <p className="mt-2 text-sm text-gray-600">{pattern.summary}</p>
+            <div className="mt-3 flex gap-4 text-sm">
+              <Link href={`/${pattern.slug}`} className="text-blue-600 hover:underline">
+                Ver demo
+              </Link>
+              <a
+                href={`${REPO_URL}/tree/main/${pattern.folder}`}
+                className="text-blue-600 hover:underline"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Ver código
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
     </main>
   );
 }

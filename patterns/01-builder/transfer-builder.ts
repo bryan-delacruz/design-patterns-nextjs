@@ -1,4 +1,4 @@
-// @/lib/transferBuilder.ts
+// @/patterns/01-builder/transfer-builder.ts
 
 export interface Transfer {
   fromAccount: string;
