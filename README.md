@@ -5,7 +5,7 @@
 ![React](https://img.shields.io/badge/react-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
 
-**Live:** [bdlc-01-article-pattern-builder.vercel.app](https://bdlc-01-article-pattern-builder.vercel.app)
+**Live:** [design-patterns-nextjs-bdlc.vercel.app](https://design-patterns-nextjs-bdlc.vercel.app)
 
 Small, focused examples of classic design patterns applied to real use cases in a modern Next.js app. Each pattern lives in its own folder with its code and a README, and has its own route in the demo.
 
@@ -13,7 +13,7 @@ Small, focused examples of classic design patterns applied to real use cases in 
 
 | # | Pattern | Type | Example | Demo |
 |---|---------|------|---------|------|
-| 01 | [Builder](patterns/01-builder) | Creational | Bank transfer form validated with Server Actions | [/builder](https://bdlc-01-article-pattern-builder.vercel.app/builder) |
+| 01 | [Builder](patterns/01-builder) | Creational | Bank transfer form validated with Server Actions | [/builder](https://design-patterns-nextjs-bdlc.vercel.app/builder) |
 
 ## Structure
 

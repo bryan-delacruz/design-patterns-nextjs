@@ -1,6 +1,6 @@
 # 01 · Builder pattern | Bank transfer form
 
-**Live demo:** [/builder](https://bdlc-01-article-pattern-builder.vercel.app/builder) · [All patterns](../../README.md)
+**Live demo:** [/builder](https://design-patterns-nextjs-bdlc.vercel.app/builder) · [All patterns](../../README.md)
 
 A small, focused example of the **Builder design pattern** in a modern Next.js app. A bank transfer form sends its data to a **Server Action**, which builds and validates a `Transfer` object step by step with a fluent `TransferBuilder`.
 
